@@ -50,7 +50,7 @@
     "effect": "^3.16.3",
     "express": "catalog:",
     "express-ws": "^5.0.2",
-    "helmet": "^7.1.0",
+    "helmet": "^8.1.0",
     "ioredis": "5.7.0",
     "react": "catalog:",
     "sharp": "^0.34.3",

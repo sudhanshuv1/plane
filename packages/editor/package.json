@@ -50,7 +50,7 @@
     "@tiptap/extension-document": "^2.22.3",
     "@tiptap/extension-emoji": "^2.22.3",
     "@tiptap/extension-heading": "^2.22.3",
-    "@tiptap/extension-image": "^2.22.3",
+    "@tiptap/extension-image": "^3.20.4",
     "@tiptap/extension-list-item": "^2.22.3",
     "@tiptap/extension-mention": "^2.22.3",
     "@tiptap/extension-placeholder": "^2.22.3",

@@ -5,6 +5,7 @@
  */
 
 import { Links, Meta, Outlet, Scripts } from "react-router";
+import { useEffect } from "react";
 // assets
 import appleTouchIcon from "@/app/assets/favicon/apple-touch-icon.png?url";
 import favicon16 from "@/app/assets/favicon/favicon-16x16.png?url";
@@ -19,9 +20,12 @@ import type { Route } from "./+types/root";
 import ErrorPage from "./error";
 import { AppProviders } from "./providers";
 // fonts
+// eslint-disable-next-line import/no-unassigned-import
 import "@fontsource-variable/inter";
 import interVariableWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+// eslint-disable-next-line import/no-unassigned-import
 import "@fontsource/material-symbols-rounded";
+// eslint-disable-next-line import/no-unassigned-import
 import "@fontsource/ibm-plex-mono";
 
 const APP_TITLE = "Plane Publish | Make your Plane boards public with one-click";
@@ -84,6 +88,19 @@ export const meta: Route.MetaFunction = () => [
 ];
 
 export default function Root() {
+  useEffect(() => {
+    // Initialize ourguide and load widget after React hydration
+    (window as any).ourguide = (window as any).ourguide || [];
+    const script = document.createElement("script");
+    script.src = "http://localhost:3008/ourguide-b2b-widget.iife.js";
+    script.dataset.productId = "prod_ba70c68d-5282-4da1-ba99-c46daddf4fa3";
+    script.dataset.apiUrl = "http://localhost:3008";
+    document.body.appendChild(script);
+    return () => {
+      script.remove();
+      document.getElementById("og2-widget-root")?.remove();
+    };
+  }, []);
   return <Outlet />;
 }
 
@@ -95,6 +112,6 @@ export function HydrateFallback() {
   );
 }
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+export function ErrorBoundary({ error: _error }: Route.ErrorBoundaryProps) {
   return <ErrorPage />;
 }

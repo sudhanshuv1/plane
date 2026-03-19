@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect } from "react";
 import Script from "next/script";
 import { Links, Meta, Outlet, Scripts } from "react-router";
 import type { LinksFunction } from "react-router";
@@ -28,9 +28,12 @@ import { LogoSpinner } from "@/components/common/logo-spinner";
 import { CustomErrorComponent } from "./error";
 import { AppProvider } from "./provider";
 // fonts
+// eslint-disable-next-line import/no-unassigned-import
 import "@fontsource-variable/inter";
 import interVariableWoff2 from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+// eslint-disable-next-line import/no-unassigned-import
 import "@fontsource/material-symbols-rounded";
+// eslint-disable-next-line import/no-unassigned-import
 import "@fontsource/ibm-plex-mono";
 
 const APP_TITLE = "Plane | Simple, extensible, open-source project management tool.";
@@ -121,6 +124,20 @@ export const meta: Route.MetaFunction = () => [
 ];
 
 export default function Root() {
+  useEffect(() => {
+    // Initialize ourguide and load widget after React hydration
+    (window as any).ourguide = (window as any).ourguide || [];
+    const script = document.createElement("script");
+    script.src = "http://localhost:3008/ourguide-b2b-widget.iife.js";
+    script.dataset.productId = "prod_ba70c68d-5282-4da1-ba99-c46daddf4fa3";
+    script.dataset.apiUrl = "http://localhost:3008";
+    document.body.appendChild(script);
+    return () => {
+      script.remove();
+      document.getElementById("og2-widget-root")?.remove();
+    };
+  }, []);
+
   return (
     <AppProvider>
       <div className={cn("relative flex h-screen w-full flex-col overflow-hidden bg-canvas", "desktop-app-container")}>

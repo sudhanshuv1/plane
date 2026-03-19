@@ -92,9 +92,9 @@ export default function Root() {
     // Initialize ourguide and load widget after React hydration
     (window as any).ourguide = (window as any).ourguide || [];
     const script = document.createElement("script");
-    script.src = "http://localhost:3008/ourguide-b2b-widget.iife.js";
+    script.src = "https://ourguide.up.railway.app/ourguide-b2b-widget.iife.js";
     script.dataset.productId = "prod_ba70c68d-5282-4da1-ba99-c46daddf4fa3";
-    script.dataset.apiUrl = "http://localhost:3008";
+    script.dataset.apiUrl = "https://ourguide.up.railway.app";
     document.body.appendChild(script);
     return () => {
       script.remove();
